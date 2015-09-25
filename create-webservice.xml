@@ -1,0 +1,35 @@
+<project name="webservices-hello_world">
+
+  <!-- ATTENTION: weblogic.jar must be added to the classpath -->
+  
+  <taskdef name="jwsc" classname="weblogic.wsee.tools.anttasks.JwscTask" />
+  <taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" />
+  <taskdef name="clientgen" classname="weblogic.wsee.tools.anttasks.ClientGenTask" />
+
+  <property name="tmp-dir" value="tmp" />
+  <!--<property name="wsdl-url" value="http://localhost:7001/WebLogicSOAPWebService/HelloWorldService?WSDL" />-->
+  <property name="wsdl-url" value="http://129.152.132.107/soapjsonproxy/SoapJsonProxyService?WSDL" />
+  <!--<property name="client-class-package" value="com.oracle.csm.soapwsexample.client" />-->
+  <property name="client-class-package" value="com.oracle.csm.soapjsonproxy.client" />
+  <property name="client-target-dir" value=""></property>
+
+
+  <target name="clean-up">
+    <delete dir="${tmp-dir}" includeemptydirs="true" />
+  </target>
+	
+  <!-- Step 1 - Create the webapp. After creating, deploy the webapp to WebLogic server and run Step 2 to generate client classes.-997 -->
+  <target name="step-1-build-service">
+  	<antcall target="clean-up" />
+
+    <jwsc srcdir="src/main/java" destdir="${tmp-dir}" >
+      <jws file="com/oracle/csm/soapjsonproxy/ws/SoapJsonProxyImpl.java" type="JAXWS" />
+    </jwsc>
+  </target>
+
+  <!-- Step 2 - Generate client classes -->
+  <target name="step-2-client">
+    <clientgen wsdl="${wsdl-url}" destDir="C:/Users/rtenorio/Documents/eclipse-workspace/soapjsonproxyclient/src/main/java" packageName="${client-class-package}" type="JAXWS" />
+  </target>
+
+</project>

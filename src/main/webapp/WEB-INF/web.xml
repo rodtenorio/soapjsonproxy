@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="3.0">
+    <display-name>SoapJsonProxyServiceWebApp</display-name>
+    <servlet>
+        <servlet-name>SoapJsonProxyServiceServlethttp</servlet-name>
+        <servlet-class>com.oracle.csm.soapjsonproxy.ws.SoapJsonProxyImpl</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SoapJsonProxyServiceServlethttp</servlet-name>
+        <url-pattern>/SoapJsonProxyService</url-pattern>
+    </servlet-mapping>
+</web-app>
